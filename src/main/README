@@ -1,0 +1,7 @@
+This is a CAS Maven WAR overlay project. Its purpose is to organize customizations such as components configuration and UI design for the CAS system.
+
+For information on how to customize your CAS system please visit the following URLs.
+
+http://jasig.github.io/cas/4.0.0/index.html
+http://jasig.github.io/cas/4.0.0/installation/Maven-Overlay-Installation.html
+
