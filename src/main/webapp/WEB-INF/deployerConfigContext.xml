@@ -149,13 +149,14 @@
    <property name="dataSource" ref="dataSource" />
 </bean>
 
+<!-- 
 <bean id="datasource"
       class="org.apache.commons.dbcp.BasicDataSource">
     <property name="driverClassName">
         <value>com.mysql.jdbc.Driver</value>
     </property>
     <property name="url">
-        <value>jdbc:mysql://localhost:3306/cas</value>
+        <value>jdbc:sql://localhost:3306/cas</value>
     </property>
     <property name="username">
         <value>cas_server</value>
@@ -164,19 +165,23 @@
         <value>pass</value>
     </property>
 </bean>
+-->
 
 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
  <property name="driverClassName">
   <value>com.mysql.jdbc.Driver</value>
  </property>
  <property name="url">
-  <value>jdbc:mysql://localhost:3306/cas</value>
+  <value>jdbc:mysql://credentials-db-0.credentials-db.mvp-webapp-websockets.svc.cluster.local:3306/cas?useSSL=false</value>
+  <!-- 
+  <value>jdbc:mysql://cassql:3306/cas?useSSL=false</value>
+  -->
  </property>
  <property name="username">
   <value>root</value>
  </property>
  <property name="password">
-  <value>shl0f4!!</value>
+  <value>lqsym</value>
  </property>
 </bean>
 

@@ -15,27 +15,38 @@
 	</root>
 
 	<logger name="org.springframework">
-		<level value="INFO" />
+		<level value="WARN" />
 	</logger>
+	
+	<logger name="org.springframework.jbdc.core">
+        <level value="WARN" />
+        <appender-ref ref="console" />
+    </logger>
 
 	<logger name="org.springframework.webflow">
 		<level value="WARN" />
 	</logger>
 
 	<logger name="org.jasig" additivity="true">
-		<level value="INFO" />
-		<appender-ref ref="cas" />
+		<level value="WARN" />
+		<appender-ref ref="console" />
 	</logger>
 
 	<logger
 		name="com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager">
-		<level value="INFO" />
-		<appender-ref ref="cas" />
+		<level value="WARN" />
+		<appender-ref ref="console" />
 	</logger>
+	
+	<logger
+        name="org.jasig.cas.authentication">
+        <level value="DEBUG" />
+        <appender-ref ref="console" />
+    </logger>
 
 	<logger name="org.jasig.cas.web.flow" additivity="true">
-		<level value="INFO" />
-		<appender-ref ref="cas" />
+		<level value="WARN" />
+		<appender-ref ref="console" />
 	</logger>
 
 
