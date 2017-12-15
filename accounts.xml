@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_0.dtd">
+
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+    <Set name="contextPath">/accounts</Set>
+    <Set name="war">/opt/accounts.war</Set>
+    <Call class="java.lang.System" name="setProperties">
+        <Arg>
+            <New class="java.util.Properties">
+                <Call name="putAll">
+                    <Arg><Call class="java.lang.System" name="getProperties"></Call></Arg>
+                </Call>
+                <Call name="setProperty">
+                    <Arg>sso.auth.mysql.url</Arg>
+                    <Arg><Env name="SSO_AUTH_MYSQL_URL"/></Arg>
+                </Call>
+            </New>
+        </Arg>
+    </Call>
+</Configure>

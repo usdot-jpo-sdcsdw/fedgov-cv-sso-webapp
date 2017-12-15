@@ -40,10 +40,12 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
-       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
        
        <import resource="usdotConfig.xml"/>
 
@@ -167,22 +169,23 @@
 </bean>
 -->
 
+<!-- 
+<bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+      <list>
+       <value>"file://${jetty.base}/resources/sso-mysql.properties"</value>
+      </list>
+    </property>
+</bean>
+ -->
+ 
 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
  <property name="driverClassName">
   <value>com.mysql.jdbc.Driver</value>
  </property>
- <property name="url">
-  <value>jdbc:mysql://credentials-db-0.credentials-db.mvp-webapp-websockets.svc.cluster.local:3306/cas?useSSL=false</value>
-  <!-- 
-  <value>jdbc:mysql://cassql:3306/cas?useSSL=false</value>
-  -->
- </property>
- <property name="username">
-  <value>root</value>
- </property>
- <property name="password">
-  <value>lqsym</value>
- </property>
+ <property name="url" value="${sso.auth.mysql.url}" />
+ <property name="username" value="${sso.auth.mysql.username}" />
+ <property name="password" value="${sso.auth.mysql.password}" />
 </bean>
 
     <!-- Required for proxy ticket mechanism -->
