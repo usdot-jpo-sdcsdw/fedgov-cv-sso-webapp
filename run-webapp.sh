@@ -13,9 +13,5 @@ OBF_PASSWORD=$(java -cp $UTIL_JAR $PASSWORD_CLASS $JETTY_KEYSTORE_PASSWORD 2>&1 
     && echo jetty.truststore.password=$OBF_PASSWORD >> $START_INI \
     && echo jetty.keystore.password=$OBF_PASSWORD >> $START_INI \
     && echo jetty.keymanager.password=$OBF_PASSWORD >> $START_INI \
-    && ln -s $NEW_KEYSTORE_PATH $DEFAULT_KEYSTORE_PATH
-#    && echo jetty.keystore=$NEW_KEYSTORE_PATH >> $START_INI \
-#    && echo jetty.truststore=$NEW_KEYSTORE_PATH >> $START_INI \
-#    && sed -i "$KEYSTORE_PATH_REPLACER" "$JETTY_HOME/modules/ssl.mod" \
-#    && sed -i "$KEYSTORE_PATH_REPLACER" "$JETTY_HOME/etc/jetty-ssl-context.xml"; 
+    && ln -s $NEW_KEYSTORE_PATH $DEFAULT_KEYSTORE_PATH ;
 /docker-entrypoint.sh $@

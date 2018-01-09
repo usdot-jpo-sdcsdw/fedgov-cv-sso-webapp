@@ -4,6 +4,7 @@ FROM jetty:9.3.11-jre8-alpine
 VOLUME $JETTY_HOME/etc/keystore_mount
 #VOLUME $JETTY_HOME/etc/sso
 
+# These are defaults, change them
 ENV SSO_AUTH_MYSQL_URL=localhost
 ENV SSO_AUTH_MYSQL_USERNAME=root
 ENV SSO_AUTH_MYSQL_PASSWORD=password
