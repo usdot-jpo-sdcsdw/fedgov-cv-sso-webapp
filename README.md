@@ -3,6 +3,10 @@
 The fedgov-cv-sso-webapp project is a webapp which contains the configuration and code to run CAS for authentication to allow access
 to other webapps.
 
+![Diagram](doc/images/fedgov-cv-sso-webapp-diagram.png)
+
+![Diagram](doc/images/fedgov-cv-sso-webapp-screenshot.png)
+
 <a name="toc"/>
 
 ## Table of Contents
