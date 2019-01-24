@@ -1,108 +1,121 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>gov.usdot</groupId>
-	<artifactId>fedgov-cv-sso-webapp</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<dependencies>
-		<dependency>
-			<groupId>org.jasig.cas</groupId>
-			<artifactId>cas-server-webapp</artifactId>
-			<version>${cas.version}</version>
-			<type>war</type>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jasig.cas</groupId>
-			<artifactId>cas-server-integration-restlet</artifactId>
-			<version>${cas.version}</version>
-			<type>jar</type>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.jasig.cas/cas-server-support-jdbc -->
-		<dependency>
-		    <groupId>org.jasig.cas</groupId>
-		    <artifactId>cas-server-support-jdbc</artifactId>
-		    <version>${cas.version}</version>
-		    <scope>runtime</scope>
-		</dependency>
-		<dependency>
-		    <groupId>commons-dbcp</groupId>
-		    <artifactId>commons-dbcp</artifactId>
-		    <version>1.2.2</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<dependency>
-		    <groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
-		    <version>6.0.6</version>
-		</dependency>
-	</dependencies>
-  
-    <profiles>
-      <profile>
-        <id>docker build</id>
-        <activation>
-          <property>
-            <name>sdcsdw.skipDocker</name>
-            <value>!true</value>
-          </property>
-        </activation>
-        <build>
-          <plugins>
-            <plugin>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>gov.usdot</groupId>
+  <artifactId>fedgov-cv-sso-webapp</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>SDC/SDW SSO Web App</name>
+  <description>Central Authentication Server for providing Single Sign-On to the SDC/SDW</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <cas.version>4.0.0</cas.version>
+    <servlet.version>2.5</servlet.version>
+    <sdcsdw.docker.repository />
+    <sdcsdw.docker.tag>testing</sdcsdw.docker.tag>
+    <dockerfile-maven-version>1.4.10</dockerfile-maven-version>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>docker build</id>
+      <activation>
+        <property>
+          <name>sdcsdw.skipDocker</name>
+          <value>!true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
             <groupId>com.spotify</groupId>
-              <artifactId>dockerfile-maven-plugin</artifactId>
-              <version>${dockerfile-maven-version}</version>
-              <executions>
-                <execution>
-                  <id>docker build</id>
-                  <goals>
-                    <goal>build</goal>
-                  </goals>
-                </execution>
-                <execution>
-                  <id>docker push</id>
-                  <goals>
-                    <goal>push</goal>
-                  </goals>
-                </execution>
-              </executions>
-              <configuration>
-                <repository>${sdcsdw.docker.repository}dotcv/webapp-sso</repository>
-                <tag>${sdcsdw.docker.tag}</tag>
-              </configuration>
-            </plugin>
-          </plugins>
-        </build>
-      </profile>
-    </profiles>
-  
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.4</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-		</plugins>
-		<finalName>accounts</finalName>
-	</build>
-	<properties>
-		<cas.version>4.0.0</cas.version>
-		<servlet.version>2.5</servlet.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sdcsdw.docker.repository></sdcsdw.docker.repository>
-        <sdcsdw.docker.tag>testing</sdcsdw.docker.tag>
-        <dockerfile-maven-version>1.4.10</dockerfile-maven-version>
-	</properties>
+            <artifactId>dockerfile-maven-plugin</artifactId>
+            <version>${dockerfile-maven-version}</version>
+            <executions>
+              <execution>
+                <id>docker build</id>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>docker push</id>
+                <goals>
+                  <goal>push</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <repository>${sdcsdw.docker.repository}dotcv/webapp-sso</repository>
+              <tag>${sdcsdw.docker.tag}</tag>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.jasig.cas</groupId>
+      <artifactId>cas-server-webapp</artifactId>
+      <version>${cas.version}</version>
+      <type>war</type>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jasig.cas</groupId>
+      <artifactId>cas-server-integration-restlet</artifactId>
+      <version>${cas.version}</version>
+      <type>jar</type>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.jasig.cas/cas-server-support-jdbc -->
+    <dependency>
+      <groupId>org.jasig.cas</groupId>
+      <artifactId>cas-server-support-jdbc</artifactId>
+      <version>${cas.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>1.2.2</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>6.0.6</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+
+    <finalName>accounts</finalName>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.4</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+    </plugins>
+
+  </build>
+
 </project>
