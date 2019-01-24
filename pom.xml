@@ -38,6 +38,46 @@
 		    <version>6.0.6</version>
 		</dependency>
 	</dependencies>
+  
+    <profiles>
+      <profile>
+        <id>docker build</id>
+        <activation>
+          <property>
+            <name>sdcsdw.skipDocker</name>
+            <value>!true</value>
+          </property>
+        </activation>
+        <build>
+          <plugins>
+            <plugin>
+            <groupId>com.spotify</groupId>
+              <artifactId>dockerfile-maven-plugin</artifactId>
+              <version>${dockerfile-maven-version}</version>
+              <executions>
+                <execution>
+                  <id>docker build</id>
+                  <goals>
+                    <goal>build</goal>
+                  </goals>
+                </execution>
+                <execution>
+                  <id>docker push</id>
+                  <goals>
+                    <goal>push</goal>
+                  </goals>
+                </execution>
+              </executions>
+              <configuration>
+                <repository>${sdcsdw.docker.repository}dotcv/webapp-sso</repository>
+                <tag>${sdcsdw.docker.tag}</tag>
+              </configuration>
+            </plugin>
+          </plugins>
+        </build>
+      </profile>
+    </profiles>
+  
 	<build>
 		<plugins>
 			<plugin>
@@ -54,7 +94,6 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-
 		</plugins>
 		<finalName>accounts</finalName>
 	</build>
@@ -62,5 +101,8 @@
 		<cas.version>4.0.0</cas.version>
 		<servlet.version>2.5</servlet.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sdcsdw.docker.repository></sdcsdw.docker.repository>
+        <sdcsdw.docker.tag>testing</sdcsdw.docker.tag>
+        <dockerfile-maven-version>1.4.10</dockerfile-maven-version>
 	</properties>
 </project>
