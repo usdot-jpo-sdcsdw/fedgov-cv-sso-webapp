@@ -52,7 +52,7 @@
               </execution>
             </executions>
             <configuration>
-              <repository>${sdcsdw.docker.repository}dotcv/webapp-sso</repository>
+              <repository>${sdcsdw.docker.repository}dotcv/sso-webapp</repository>
               <tag>${sdcsdw.docker.tag}</tag>
             </configuration>
           </plugin>
